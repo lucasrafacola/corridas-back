@@ -14,9 +14,9 @@ namespace ApiCorridas.Services
             _competidoresRepository = competidoresRepository;
         }
 
-        public bool AdicionarCompetidor(Competidor model)
+        public Task<bool> AdicionarCompetidor(Competidor model)
         {
-            throw new NotImplementedException();
+            return _competidoresRepository.AdicionarCompetidor(model);
         }
 
         public bool AlterarCompetidor(Competidor model)

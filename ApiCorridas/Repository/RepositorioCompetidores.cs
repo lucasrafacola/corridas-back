@@ -1,5 +1,6 @@
 ﻿using ApiCorridas.Models;
 using ApiCorridas.Repository.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ApiCorridas.Repository
 {
@@ -12,9 +13,11 @@ namespace ApiCorridas.Repository
             _context = context;
         }
 
-        public bool AdicionarCompetidor(Competidor model)
+        public async Task<bool> AdicionarCompetidor(Competidor model)
         {
-            throw new NotImplementedException();
+            _context.Competidores.AddAsync(model);
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         public bool AlterarCompetidor(Competidor model)

@@ -2,6 +2,7 @@
 using ApiCorridas.Services;
 using ApiCorridas.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Web.Http.Routing;
 
 namespace ApiCorridas.Controllers
@@ -18,24 +19,42 @@ namespace ApiCorridas.Controllers
         }
 
         [HttpGet]
-        public IResult Get()
+        public IActionResult Get()
         {
-            var res = _competidoresService.SelecionaTodosCompetidores();
-            return Results.Ok(res);
+            try
+            {
+                var res = _competidoresService.SelecionaTodosCompetidores();
+
+                Response.StatusCode = StatusCodes.Status200OK;
+                return new JsonResult(res);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         [HttpGet("{id}")]
-        public IResult Get(int id)
+        public IActionResult Get(int id)
         {
-            var res = _competidoresService.SelecionaUmCompetidor(id);
-            return Results.Ok(res);
+            try
+            {
+                var res = _competidoresService.SelecionaUmCompetidor(id);
+                Response.StatusCode = StatusCodes.Status200OK;
+                return new JsonResult(res);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         [HttpPost]
-        public IResult Adicionar([FromBody] Competidor model)
+        public int Adicionar([FromBody] Competidor model)
         {
-            var res = _competidoresService.AdicionarCompetidor(model);
-            return Results.Ok(res);
+            _competidoresService.AdicionarCompetidor(model);
+            var response = Response.StatusCode = StatusCodes.Status201Created;
+            return response;
         }
 
         [HttpPut("{id}")]
