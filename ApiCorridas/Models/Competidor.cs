@@ -1,14 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ApiCorridas.Models
 {
-    public class Competidores
+    public class Competidor
     {
         [Key]
-        public int Id { get; set; }
+        [JsonIgnore]
+        public int? Id { get; set; }
 
         [Required(ErrorMessage = "Nome não pode ser nulo.")]
-        public string Nome { get; set; }
+        public string? Nome { get; set; }
 
         [Required(ErrorMessage = "Sexo não pode ser nulo.")]
         public char Sexo { get; set; }
@@ -21,5 +23,8 @@ namespace ApiCorridas.Models
 
         [Required(ErrorMessage = "Altura não pode ser nulo.")]
         public decimal Altura { get; set; }
+
+        [JsonIgnore]
+        public List<HistoricoCorrida>? Historico { get; set; }
     }
 }

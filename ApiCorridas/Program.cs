@@ -1,6 +1,21 @@
+using ApiCorridas.Repository;
+using ApiCorridas.Repository.Interfaces;
+using ApiCorridas.Services;
+using ApiCorridas.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// Adiciona classes de persistência
+builder.Services.AddScoped<ICompetidoresRepository, RepositorioCompetidores>();
+
+//Adiciona services
+builder.Services.AddScoped<ICompetidoresService, ServicoCompetidores>();
+
+var connectionStringMySql = builder.Configuration.GetConnectionString("ConnectionMySql");
+builder.Services.AddDbContext<APIDbContext>(x => x.UseMySql(connectionStringMySql, ServerVersion.Parse("8.0.27")));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

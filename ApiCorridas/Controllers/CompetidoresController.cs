@@ -1,40 +1,48 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using ApiCorridas.Models;
+using ApiCorridas.Services;
+using ApiCorridas.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using System.Web.Http.Routing;
 
 namespace ApiCorridas.Controllers
 {
-    [Route("api/[Competidores]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CompetidoresController : ControllerBase
     {
-        // GET: api/<ValuesController>
+        private readonly ICompetidoresService _competidoresService;
+
+        public CompetidoresController(ICompetidoresService competidoresService)
+        {
+            _competidoresService = competidoresService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var res = _competidoresService.SelecionaTodosCompetidores();
+            return Results.Ok(res);
         }
 
-        // GET api/<ValuesController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IResult Get(int id)
         {
-            return "value";
+            var res = _competidoresService.SelecionaUmCompetidor(id);
+            return Results.Ok(res);
         }
 
-        // POST api/<ValuesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IResult Adicionar([FromBody] Competidor model)
         {
+            var res = _competidoresService.AdicionarCompetidor(model);
+            return Results.Ok(res);
         }
 
-        // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<ValuesController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
