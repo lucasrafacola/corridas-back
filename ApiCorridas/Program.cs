@@ -9,9 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 // Adiciona classes de persistência
+builder.Services.AddScoped<IPistasRepository, RepositorioPistas>();
 builder.Services.AddScoped<ICompetidoresRepository, RepositorioCompetidores>();
 
 //Adiciona services
+builder.Services.AddScoped<IPistasService, ServicoPistas>();
 builder.Services.AddScoped<ICompetidoresService, ServicoCompetidores>();
 
 var connectionStringMySql = builder.Configuration.GetConnectionString("ConnectionMySql");
