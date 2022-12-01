@@ -13,21 +13,28 @@ namespace ApiCorridas.Repository
             _context = context;
         }
 
-        public async Task<bool> AdicionarCompetidor(Competidor model)
+        public async Task<bool> AdicionarCompetidor(Competidor competidor)
         {
-            _context.Competidores.AddAsync(model);
+            _context.Competidores.Add(competidor);
             await _context.SaveChangesAsync();
             return true;
         }
 
-        public bool AlterarCompetidor(Competidor model)
+        public async Task<bool> AlterarCompetidor(int id, Competidor competidor)
         {
-            throw new NotImplementedException();
+            competidor.Id = id;
+            _context.Competidores.Update(competidor);
+            await _context.SaveChangesAsync();
+            return true;
         }
 
-        public bool ExcluirCompetidor(int id)
+        public async Task<bool> ExcluirCompetidor(int id)
         {
-            throw new NotImplementedException();
+            var competidor = _context.Competidores.Find(id);
+            _context.Competidores.Remove(competidor);
+            await _context.SaveChangesAsync();
+            return true;
+
         }
 
         public List<Competidor> SelecionaTodosCompetidores()

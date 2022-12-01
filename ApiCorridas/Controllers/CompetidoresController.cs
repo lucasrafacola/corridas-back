@@ -25,12 +25,11 @@ namespace ApiCorridas.Controllers
             {
                 var res = _competidoresService.SelecionaTodosCompetidores();
 
-                Response.StatusCode = StatusCodes.Status200OK;
-                return new JsonResult(res);
+                return Ok(res);
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
+                return BadRequest();
             }
         }
 
@@ -40,31 +39,54 @@ namespace ApiCorridas.Controllers
             try
             {
                 var res = _competidoresService.SelecionaUmCompetidor(id);
-                Response.StatusCode = StatusCodes.Status200OK;
-                return new JsonResult(res);
+                return Ok(res);
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
+                return BadRequest();
             }
         }
 
         [HttpPost]
-        public int Adicionar([FromBody] Competidor model)
+        public async Task<IActionResult> Post([FromBody] Competidor competidor)
         {
-            _competidoresService.AdicionarCompetidor(model);
-            var response = Response.StatusCode = StatusCodes.Status201Created;
-            return response;
+            try
+            {
+                var res = await _competidoresService.AdicionarCompetidor(competidor);
+                return Ok(competidor);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, [FromBody] Competidor competidor)
         {
+            try
+            {
+                var res = await _competidoresService.AlterarCompetidor(id, competidor);
+                return Ok(competidor);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            try
+            {
+                var res = await _competidoresService.ExcluirCompetidor(id);
+                return Ok(id);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }

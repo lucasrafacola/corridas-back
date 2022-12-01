@@ -23,9 +23,9 @@ namespace ApiCorridas.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Sexo = table.Column<string>(type: "varchar(1)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    TempMedCorpo = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    Peso = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    Altura = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
+                    TempMedCorpo = table.Column<double>(type: "double", nullable: false),
+                    Peso = table.Column<double>(type: "double", nullable: false),
+                    Altura = table.Column<double>(type: "double", nullable: false)
                 },
                 constraints: table =>
                 {

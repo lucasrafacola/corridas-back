@@ -16,13 +16,13 @@ namespace ApiCorridas.Models
         public char Sexo { get; set; }
 
         [Required(ErrorMessage = "TempMedCorpo não pode ser nulo.")]
-        public decimal TempMedCorpo { get; set; }
+        public double TempMedCorpo { get; set; }
 
         [Required(ErrorMessage = "Peso não pode ser nulo.")]
-        public decimal Peso { get; set; }
+        public double Peso { get; set; }
 
         [Required(ErrorMessage = "Altura não pode ser nulo.")]
-        public decimal Altura { get; set; }
+        public double Altura { get; set; }
 
         [JsonIgnore]
         public List<HistoricoCorrida>? Historico { get; set; }

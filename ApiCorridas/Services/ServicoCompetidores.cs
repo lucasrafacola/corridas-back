@@ -14,19 +14,19 @@ namespace ApiCorridas.Services
             _competidoresRepository = competidoresRepository;
         }
 
-        public Task<bool> AdicionarCompetidor(Competidor model)
+        public async Task<bool> AdicionarCompetidor(Competidor competidor)
         {
-            return _competidoresRepository.AdicionarCompetidor(model);
+            return await _competidoresRepository.AdicionarCompetidor(competidor);
         }
 
-        public bool AlterarCompetidor(Competidor model)
+        public async Task<bool> AlterarCompetidor(int id, Competidor competidor)
         {
-            throw new NotImplementedException();
+            return await _competidoresRepository.AlterarCompetidor(id, competidor);
         }
 
-        public bool ExcluirCompetidor(int id)
+        public async Task<bool> ExcluirCompetidor(int id)
         {
-            throw new NotImplementedException();
+            return await _competidoresRepository.ExcluirCompetidor(id);
         }
 
         public List<Competidor> SelecionaTodosCompetidores()

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiCorridas.Migrations
 {
     [DbContext(typeof(APIDbContext))]
-    [Migration("20221129232133_inicial")]
+    [Migration("20221201000656_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,26 +23,26 @@ namespace ApiCorridas.Migrations
 
             modelBuilder.Entity("ApiCorridas.Models.Competidor", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Altura")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<double>("Altura")
+                        .HasColumnType("double");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<decimal>("Peso")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<double>("Peso")
+                        .HasColumnType("double");
 
                     b.Property<string>("Sexo")
                         .IsRequired()
                         .HasColumnType("varchar(1)");
 
-                    b.Property<decimal>("TempMedCorpo")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<double>("TempMedCorpo")
+                        .HasColumnType("double");
 
                     b.HasKey("Id");
 
