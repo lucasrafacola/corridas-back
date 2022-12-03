@@ -53,7 +53,11 @@ namespace ApiCorridas.Controllers
             try
             {
                 var res = await _competidoresService.AdicionarCompetidor(competidor);
-                return Ok(competidor);
+
+                if (res)
+                    return Ok(competidor);
+                else
+                    return BadRequest(competidor);
             }
             catch
             {
@@ -67,7 +71,11 @@ namespace ApiCorridas.Controllers
             try
             {
                 var res = await _competidoresService.AlterarCompetidor(id, competidor);
-                return Ok(competidor);
+
+                if (res)
+                    return Ok(competidor);
+                else
+                    return BadRequest(competidor);
             }
             catch
             {

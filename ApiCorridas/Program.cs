@@ -2,6 +2,7 @@ using ApiCorridas.Repository;
 using ApiCorridas.Repository.Interfaces;
 using ApiCorridas.Services;
 using ApiCorridas.Services.Interfaces;
+using ApiCorridas.Services.Utils;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,10 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Adiciona classes de persistência
 builder.Services.AddScoped<IPistasRepository, RepositorioPistas>();
 builder.Services.AddScoped<ICompetidoresRepository, RepositorioCompetidores>();
+builder.Services.AddScoped<IHistoricoCorridasRepository, RepositorioHistoricoCorridas>();
 
 //Adiciona services
 builder.Services.AddScoped<IPistasService, ServicoPistas>();
 builder.Services.AddScoped<ICompetidoresService, ServicoCompetidores>();
+builder.Services.AddScoped<IHistoricoCorridasService, ServicoHistoricoCorridas>();
+builder.Services.AddScoped<IUtils, Utils>();
 
 var connectionStringMySql = builder.Configuration.GetConnectionString("ConnectionMySql");
 builder.Services.AddDbContext<APIDbContext>(x => x.UseMySql(connectionStringMySql, ServerVersion.Parse("8.0.27")));
