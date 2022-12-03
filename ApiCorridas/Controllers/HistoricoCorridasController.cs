@@ -49,7 +49,6 @@ namespace ApiCorridas.Controllers
             try
             {
                 var res = await _historicoCorridasService.AdicionarCorrida(model);
-                return Ok(model);
 
                 if (res)
                     return Ok(model);

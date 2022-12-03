@@ -20,6 +20,6 @@ namespace ApiCorridas.Models
         public DateTime DataCorrida { get; set; }
 
         [Required(ErrorMessage = "TempoGasto não pode ser nulo.")]
-        public decimal TempoGasto { get; set; }
+        public double TempoGasto { get; set; }
     }
 }
